@@ -16,6 +16,8 @@ import { randomUUID } from "crypto";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
+export type { Student };
+
 export type SessionWithStudent = Session & { student: Student };
 
 export type StudentWithNextSession = Student & {
