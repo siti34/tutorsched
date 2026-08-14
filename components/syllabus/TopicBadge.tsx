@@ -18,9 +18,9 @@ export default function TopicBadge({
   if (covered) {
     return (
       <span
-        className={`inline-flex items-center gap-1 ${textSize} font-medium ${padding} rounded-full bg-teal-50 text-teal-700 border border-teal-100`}
+        className={`inline-flex items-center gap-1 ${textSize} font-medium ${padding} rounded-full bg-success-bg text-success-text`}
       >
-        <CheckCircle2 size={iconSize} className="text-teal-500 flex-shrink-0" />
+        <CheckCircle2 size={iconSize} className="text-success-text flex-shrink-0" />
         {name}
       </span>
     );
@@ -28,9 +28,9 @@ export default function TopicBadge({
 
   return (
     <span
-      className={`inline-flex items-center gap-1 ${textSize} font-medium ${padding} rounded-full bg-ice-100 text-muted-foreground border border-border`}
+      className={`inline-flex items-center gap-1 ${textSize} font-medium ${padding} rounded-full bg-page text-muted-foreground border border-border`}
     >
-      <Circle size={iconSize} className="text-slate-300 flex-shrink-0" />
+      <Circle size={iconSize} className="text-muted-foreground flex-shrink-0" />
       {name}
     </span>
   );

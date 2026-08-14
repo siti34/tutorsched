@@ -101,12 +101,12 @@ export default function PreLessonBriefClient({ data }: Props) {
       <div className="flex items-center gap-3 mb-5">
         <Link
           href={`/students/${student.id}`}
-          className="w-9 h-9 rounded-xl flex items-center justify-center border border-border bg-white hover:bg-ice-100 transition-colors cursor-pointer"
+          className="w-9 h-9 rounded-xl flex items-center justify-center border border-border bg-white hover:bg-page transition-colors cursor-pointer"
         >
-          <ArrowLeft size={17} className="text-khan-navy" />
+          <ArrowLeft size={17} className="text-deep-navy" />
         </Link>
         <div className="flex-1 min-w-0">
-          <h1 className="text-lg font-bold text-khan-navy leading-tight truncate">
+          <h1 className="text-lg font-medium text-deep-navy leading-tight truncate">
             Pre-Lesson Brief
           </h1>
           <p className="text-xs text-muted-foreground">{student.name}</p>
@@ -114,16 +114,16 @@ export default function PreLessonBriefClient({ data }: Props) {
       </div>
 
       {/* ── Session hero card ── */}
-      <div className="bg-khan-navy rounded-2xl p-5 mb-5 relative overflow-hidden">
+      <div className="bg-action-blue rounded-2xl p-5 mb-5 relative overflow-hidden">
         <div className="absolute -right-6 -top-6 w-28 h-28 rounded-full bg-white/5" />
-        <div className="absolute right-3 -bottom-4 w-16 h-16 rounded-full bg-teal-500/20" />
+        <div className="absolute right-3 -bottom-4 w-16 h-16 rounded-full bg-white/10" />
 
         <div className="relative flex items-center gap-3 mb-4">
-          <div className="w-11 h-11 rounded-xl bg-teal-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+          <div className="w-11 h-11 rounded-xl bg-action-blue-700 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
             {getInitials(student.name)}
           </div>
           <div>
-            <p className="text-white font-bold leading-tight">{student.name}</p>
+            <p className="text-white font-medium leading-tight">{student.name}</p>
             <p className="text-white/60 text-xs">{student.subject}</p>
           </div>
         </div>
@@ -131,7 +131,7 @@ export default function PreLessonBriefClient({ data }: Props) {
         {/* Session time + details */}
         <div className="relative bg-white/10 rounded-xl p-3 space-y-1.5">
           <div className="flex items-center gap-2 text-white/90 text-sm font-medium">
-            <Calendar size={13} className="text-teal-400 flex-shrink-0" />
+            <Calendar size={13} className="text-sky-accent flex-shrink-0" />
             {formatDateTime(session.scheduledAt)}
           </div>
           <div className="flex items-center gap-4 text-white/60 text-xs">
@@ -167,21 +167,21 @@ export default function PreLessonBriefClient({ data }: Props) {
       )}
 
       {/* ── Syllabus progress summary ── */}
-      <div className="bg-white rounded-xl border border-border shadow-card p-4 mb-4">
+      <div className="bg-white rounded-xl border border-border p-4 mb-4">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
-            <BookOpen size={15} className="text-teal-500" />
-            <span className="text-sm font-bold text-khan-navy">
+            <BookOpen size={15} className="text-action-blue" />
+            <span className="text-sm font-medium text-deep-navy">
               Syllabus Progress
             </span>
           </div>
-          <span className="text-sm font-bold text-teal-600">
+          <span className="text-sm font-bold text-action-blue">
             {coveredCount}/{totalTopics}
           </span>
         </div>
-        <div className="w-full h-2 bg-ice-200 rounded-full overflow-hidden mb-2">
+        <div className="w-full h-2 bg-border rounded-full overflow-hidden mb-2">
           <div
-            className="h-full bg-teal-500 rounded-full transition-all duration-700"
+            className="h-full bg-action-blue rounded-full transition-all duration-700"
             style={{ width: `${progressPct}%` }}
           />
         </div>
@@ -191,7 +191,7 @@ export default function PreLessonBriefClient({ data }: Props) {
           </p>
           <button
             onClick={() => setSyllabusExpanded((p) => !p)}
-            className="flex items-center gap-1 text-[11px] text-teal-600 font-medium hover:text-teal-700 cursor-pointer transition-colors"
+            className="flex items-center gap-1 text-[11px] text-action-blue font-medium hover:text-action-blue-700 cursor-pointer transition-colors"
           >
             {syllabusExpanded ? (
               <>
@@ -205,9 +205,9 @@ export default function PreLessonBriefClient({ data }: Props) {
           </button>
         </div>
         {newlyTaggedIds.length > 0 && (
-          <div className="mt-2 flex items-center gap-1.5 px-2.5 py-1.5 bg-teal-50 border border-teal-100 rounded-lg animate-fade-in">
-            <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
-            <p className="text-[11px] text-teal-700 font-medium">
+          <div className="mt-2 flex items-center gap-1.5 px-2.5 py-1.5 bg-success-bg rounded-lg animate-fade-in">
+            <span className="w-1.5 h-1.5 rounded-full bg-success-text animate-pulse" />
+            <p className="text-[11px] text-success-text font-medium">
               AI just tagged {newlyTaggedIds.length} new topic
               {newlyTaggedIds.length !== 1 ? "s" : ""}
             </p>
@@ -226,17 +226,17 @@ export default function PreLessonBriefClient({ data }: Props) {
       )}
 
       {/* ── Current session note card ── */}
-      <div className="bg-white rounded-xl border border-border shadow-card p-4 mb-4">
+      <div className="bg-white rounded-xl border border-border p-4 mb-4">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
-            <PenLine size={15} className="text-khan-navy" />
-            <span className="text-sm font-bold text-khan-navy">
+            <PenLine size={15} className="text-deep-navy" />
+            <span className="text-sm font-medium text-deep-navy">
               Session Notes
             </span>
           </div>
           <button
             onClick={() => setNoteEditorOpen(true)}
-            className="flex items-center gap-1.5 text-xs font-semibold text-white bg-teal-500 hover:bg-teal-600 transition-colors px-3 py-1.5 rounded-lg cursor-pointer"
+            className="flex items-center gap-1.5 text-xs font-semibold text-white bg-action-blue hover:bg-action-blue-600 transition-colors px-3 py-1.5 rounded-lg cursor-pointer"
           >
             <PenLine size={11} />
             {localNoteContent.trim() ? "Edit Notes" : "Add Notes"}
@@ -244,12 +244,12 @@ export default function PreLessonBriefClient({ data }: Props) {
         </div>
 
         {localNoteContent.trim() ? (
-          <p className="text-sm text-slate-600 leading-relaxed whitespace-pre-wrap bg-ice-50 rounded-lg p-3">
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-wrap bg-page rounded-lg p-3">
             {localNoteContent}
           </p>
         ) : (
           <div className="text-center py-6">
-            <PenLine size={24} className="text-ice-200 mx-auto mb-2" />
+            <PenLine size={24} className="text-border mx-auto mb-2" />
             <p className="text-xs text-muted-foreground">
               No notes yet for this session.
             </p>
@@ -262,18 +262,18 @@ export default function PreLessonBriefClient({ data }: Props) {
 
       {/* ── Last session notes card ── */}
       {lastNote && (
-        <div className="bg-white rounded-xl border border-border shadow-card p-4 mb-4">
+        <div className="bg-white rounded-xl border border-border p-4 mb-4">
           <button
             onClick={() => setLastNoteExpanded((p) => !p)}
             className="w-full flex items-center justify-between cursor-pointer"
           >
             <div className="flex items-center gap-2">
               <FileText size={15} className="text-muted-foreground" />
-              <span className="text-sm font-bold text-khan-navy">
+              <span className="text-sm font-medium text-deep-navy">
                 Last Session Notes
               </span>
               {lastSessionDate && (
-                <span className="text-[10px] text-muted-foreground bg-ice-100 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] text-muted-foreground bg-page px-2 py-0.5 rounded-full">
                   {timeAgo(lastSessionDate)} ·{" "}
                   {formatDateShort(lastSessionDate)}
                 </span>
@@ -289,7 +289,7 @@ export default function PreLessonBriefClient({ data }: Props) {
           {lastNoteExpanded && (
             <div className="mt-3 animate-fade-in">
               {lastNote.content.trim() ? (
-                <p className="text-sm text-slate-600 leading-relaxed bg-ice-50 rounded-lg p-3 whitespace-pre-wrap">
+                <p className="text-sm text-muted-foreground leading-relaxed bg-page rounded-lg p-3 whitespace-pre-wrap">
                   {lastNote.content}
                 </p>
               ) : (
@@ -303,10 +303,10 @@ export default function PreLessonBriefClient({ data }: Props) {
       )}
 
       {!lastNote && (
-        <div className="bg-white rounded-xl border border-border shadow-card p-4 mb-4">
+        <div className="bg-white rounded-xl border border-border p-4 mb-4">
           <div className="flex items-center gap-2 mb-1">
             <FileText size={15} className="text-muted-foreground" />
-            <span className="text-sm font-bold text-khan-navy">
+            <span className="text-sm font-medium text-deep-navy">
               Last Session Notes
             </span>
           </div>

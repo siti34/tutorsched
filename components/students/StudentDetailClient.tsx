@@ -55,9 +55,9 @@ function formatShortDate(iso: string) {
 }
 
 const STATUS_STYLES = {
-  upcoming: "bg-teal-50 text-teal-600",
-  completed: "bg-ice-200 text-slate-500",
-  cancelled: "bg-red-50 text-red-500",
+  upcoming: "bg-success-bg text-success-text",
+  completed: "bg-border text-muted-foreground",
+  cancelled: "bg-error-bg text-error-text",
 };
 
 export default function StudentDetailClient({ data }: Props) {
@@ -76,12 +76,12 @@ export default function StudentDetailClient({ data }: Props) {
       <div className="flex items-center gap-3 mb-6">
         <Link
           href="/students"
-          className="w-9 h-9 rounded-xl flex items-center justify-center border border-border bg-white hover:bg-ice-100 transition-colors cursor-pointer"
+          className="w-9 h-9 rounded-xl flex items-center justify-center border border-border bg-white hover:bg-page transition-colors cursor-pointer"
         >
-          <ArrowLeft size={17} className="text-khan-navy" />
+          <ArrowLeft size={17} className="text-deep-navy" />
         </Link>
         <div>
-          <h1 className="text-xl font-bold text-khan-navy leading-tight">
+          <h1 className="text-xl font-medium text-deep-navy leading-tight">
             {student.name}
           </h1>
           <p className="text-xs text-muted-foreground">{student.subject}</p>
@@ -89,13 +89,13 @@ export default function StudentDetailClient({ data }: Props) {
       </div>
 
       {/* Student hero card */}
-      <div className="bg-khan-navy rounded-2xl p-5 mb-5 relative overflow-hidden">
+      <div className="bg-action-blue rounded-2xl p-5 mb-5 relative overflow-hidden">
         {/* Background decoration */}
         <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-white/5" />
-        <div className="absolute -right-2 -bottom-6 w-20 h-20 rounded-full bg-teal-500/20" />
+        <div className="absolute -right-2 -bottom-6 w-20 h-20 rounded-full bg-action-blue-700/40" />
 
         <div className="relative flex items-start gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-teal-500 flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+          <div className="w-14 h-14 rounded-2xl bg-action-blue-700 flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
             {getInitials(student.name)}
           </div>
           <div className="flex-1 min-w-0">
@@ -109,8 +109,8 @@ export default function StudentDetailClient({ data }: Props) {
             <div
               className={`px-2.5 py-1 rounded-full text-xs font-bold flex-shrink-0 ${
                 urgent
-                  ? "bg-sun-500 text-white"
-                  : "bg-teal-500 text-white"
+                  ? "bg-warning-text text-white"
+                  : "bg-action-blue-700 text-white"
               }`}
             >
               {days}d to exam
@@ -149,7 +149,7 @@ export default function StudentDetailClient({ data }: Props) {
         {/* Test info */}
         {student.testDate && (
           <div className="mt-3 flex items-center gap-2 bg-white/10 rounded-xl px-3 py-2">
-            <Target size={13} className="text-sun-500 flex-shrink-0" />
+            <Target size={13} className="text-warning-text flex-shrink-0" />
             <span className="text-white/80 text-xs">
               {student.testName ?? "Exam"} on{" "}
               {new Date(student.testDate).toLocaleDateString("en-SG", {
@@ -163,7 +163,7 @@ export default function StudentDetailClient({ data }: Props) {
 
         {/* Hourly rate */}
         <div className="mt-2 flex items-center gap-2 bg-white/10 rounded-xl px-3 py-2">
-          <TrendingUp size={13} className="text-teal-400 flex-shrink-0" />
+          <TrendingUp size={13} className="text-sky-accent flex-shrink-0" />
           <span className="text-white/80 text-xs">
             SGD ${student.hourlyRate}/hr
           </span>
@@ -176,8 +176,8 @@ export default function StudentDetailClient({ data }: Props) {
           onClick={() => setTab("sessions")}
           className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
             tab === "sessions"
-              ? "bg-khan-navy text-white shadow-card"
-              : "text-muted-foreground hover:text-khan-navy"
+              ? "bg-action-blue text-white"
+              : "text-muted-foreground hover:text-deep-navy"
           }`}
         >
           Sessions
@@ -186,8 +186,8 @@ export default function StudentDetailClient({ data }: Props) {
           onClick={() => setTab("progress")}
           className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
             tab === "progress"
-              ? "bg-khan-navy text-white shadow-card"
-              : "text-muted-foreground hover:text-khan-navy"
+              ? "bg-action-blue text-white"
+              : "text-muted-foreground hover:text-deep-navy"
           }`}
         >
           Progress
@@ -206,7 +206,7 @@ export default function StudentDetailClient({ data }: Props) {
               key={session.id}
               href={`/students/${student.id}/sessions/${session.id}`}
             >
-              <div className="bg-white rounded-xl border border-border shadow-card hover:shadow-card-hover transition-all duration-150 active:scale-[0.99] cursor-pointer p-4">
+              <div className="bg-white rounded-xl border border-border transition-all duration-150 active:scale-[0.99] cursor-pointer p-4">
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
@@ -220,12 +220,12 @@ export default function StudentDetailClient({ data }: Props) {
                         {session.status}
                       </span>
                       {session.coveredTopics.length > 0 && (
-                        <span className="text-[10px] text-teal-600 bg-teal-50 px-2 py-0.5 rounded-full font-medium">
+                        <span className="text-[10px] text-success-text bg-success-bg px-2 py-0.5 rounded-full font-medium">
                           {session.coveredTopics.length} topics tagged
                         </span>
                       )}
                     </div>
-                    <p className="text-khan-navy font-semibold text-sm">
+                    <p className="text-deep-navy font-semibold text-sm">
                       {formatDate(session.scheduledAt)}
                     </p>
                     <div className="flex items-center gap-3 mt-1.5 text-xs text-muted-foreground">
@@ -243,7 +243,7 @@ export default function StudentDetailClient({ data }: Props) {
                       </span>
                     </div>
                     {session.note && (
-                      <p className="mt-2 text-xs text-muted-foreground line-clamp-2 bg-ice-50 rounded-lg p-2">
+                      <p className="mt-2 text-xs text-muted-foreground line-clamp-2 bg-page rounded-lg p-2">
                         {session.note.content || "No notes yet"}
                       </p>
                     )}
@@ -257,10 +257,10 @@ export default function StudentDetailClient({ data }: Props) {
       ) : (
         /* Progress tab — syllabus overview */
         <div className="pb-28">
-          <div className="bg-white rounded-xl border border-border shadow-card p-4 mb-4">
+          <div className="bg-white rounded-xl border border-border p-4 mb-4">
             <div className="flex items-center gap-2 mb-3">
-              <BookOpen size={16} className="text-teal-500" />
-              <h2 className="text-khan-navy font-bold text-sm">
+              <BookOpen size={16} className="text-action-blue" />
+              <h2 className="text-deep-navy font-medium text-sm">
                 Syllabus Coverage
               </h2>
               <span className="ml-auto text-xs text-muted-foreground">
@@ -276,7 +276,7 @@ export default function StudentDetailClient({ data }: Props) {
                 {coveredTopicIds.map((topicId) => (
                   <span
                     key={topicId}
-                    className="inline-flex items-center gap-1 text-xs bg-teal-50 text-teal-700 px-2.5 py-1 rounded-full font-medium"
+                    className="inline-flex items-center gap-1 text-xs bg-success-bg text-success-text px-2.5 py-1 rounded-full font-medium"
                   >
                     <CheckCircle2 size={10} />
                     {topicId}
@@ -287,10 +287,10 @@ export default function StudentDetailClient({ data }: Props) {
           </div>
 
           {/* Session timeline */}
-          <div className="bg-white rounded-xl border border-border shadow-card p-4">
+          <div className="bg-white rounded-xl border border-border p-4">
             <div className="flex items-center gap-2 mb-3">
-              <CalendarDays size={16} className="text-khan-navy" />
-              <h2 className="text-khan-navy font-bold text-sm">
+              <CalendarDays size={16} className="text-deep-navy" />
+              <h2 className="text-deep-navy font-medium text-sm">
                 Session Timeline
               </h2>
             </div>
@@ -299,7 +299,7 @@ export default function StudentDetailClient({ data }: Props) {
                 <div key={s.id} className="flex items-center gap-3">
                   <div className="flex flex-col items-center">
                     {s.status === "completed" ? (
-                      <CheckCircle2 size={14} className="text-teal-500" />
+                      <CheckCircle2 size={14} className="text-success-text" />
                     ) : (
                       <Circle size={14} className="text-muted-foreground" />
                     )}
@@ -308,11 +308,11 @@ export default function StudentDetailClient({ data }: Props) {
                     )}
                   </div>
                   <div className="flex-1 pb-2">
-                    <p className="text-xs text-khan-navy font-medium">
+                    <p className="text-xs text-deep-navy font-medium">
                       {formatShortDate(s.scheduledAt)}
                     </p>
                     {s.coveredTopics.length > 0 && (
-                      <p className="text-[10px] text-teal-600">
+                      <p className="text-[10px] text-success-text">
                         {s.coveredTopics.length} topic
                         {s.coveredTopics.length !== 1 ? "s" : ""} covered
                       </p>

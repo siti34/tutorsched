@@ -26,15 +26,25 @@ export default function CountdownBadge({
   const urgent = days <= 30;
   const veryUrgent = days <= 7;
 
+  const formattedDate = new Date(testDate).toLocaleDateString("en-SG", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+  const message =
+    days <= 0
+      ? "Exam today!"
+      : `${days} day${days !== 1 ? "s" : ""} to ${testName ?? "exam"}`;
+
   if (variant === "compact") {
     return (
       <span
         className={`inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full ${
           veryUrgent
-            ? "bg-red-500 text-white"
+            ? "bg-error-text text-white"
             : urgent
-            ? "bg-sun-500 text-white"
-            : "bg-sun-50 text-sun-600"
+            ? "bg-warning-bg text-warning-text"
+            : "bg-page border border-border text-muted-foreground"
         }`}
       >
         {veryUrgent && <AlertTriangle size={10} />}
@@ -47,55 +57,44 @@ export default function CountdownBadge({
     <div
       className={`flex items-center gap-2.5 rounded-xl px-3 py-2.5 ${
         veryUrgent
-          ? "bg-red-50 border border-red-200"
+          ? "bg-error-bg border border-error-text/20"
           : urgent
-          ? "bg-sun-50 border border-sun-100"
-          : "bg-ice-100 border border-border"
+          ? "bg-warning-bg border border-warning-text/20"
+          : "bg-page border border-border"
       }`}
     >
       <div
         className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
           veryUrgent
-            ? "bg-red-100"
+            ? "bg-error-bg"
             : urgent
-            ? "bg-sun-100"
-            : "bg-ice-200"
+            ? "bg-warning-bg"
+            : "bg-white"
         }`}
       >
         {veryUrgent ? (
-          <AlertTriangle
-            size={15}
-            className="text-red-500"
-          />
+          <AlertTriangle size={15} className="text-error-text" />
         ) : (
           <Target
             size={15}
-            className={urgent ? "text-sun-600" : "text-khan-navy"}
+            className={urgent ? "text-warning-text" : "text-deep-navy"}
           />
         )}
       </div>
-      <div>
-        <p
-          className={`text-xs font-bold ${
-            veryUrgent
-              ? "text-red-600"
-              : urgent
-              ? "text-sun-600"
-              : "text-khan-navy"
-          }`}
-        >
-          {days <= 0
-            ? "Exam today!"
-            : `${days} day${days !== 1 ? "s" : ""} to ${testName ?? "exam"}`}
-        </p>
-        <p className="text-[10px] text-muted-foreground">
-          {new Date(testDate).toLocaleDateString("en-SG", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          })}
-        </p>
-      </div>
+      <p
+        className={`text-xs font-bold truncate min-w-0 flex-1 ${
+          veryUrgent
+            ? "text-error-text"
+            : urgent
+            ? "text-warning-text"
+            : "text-deep-navy"
+        }`}
+      >
+        {message}
+        <span className="ml-1 font-normal text-muted-foreground">
+          · {formattedDate}
+        </span>
+      </p>
     </div>
   );
 }

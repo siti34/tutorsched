@@ -44,7 +44,7 @@ function formatDuration(min: number) {
 
 // Static PayLah QR placeholder
 const PAYLAH_QR_URL =
-  "https://placehold.co/200x200/0A2A66/FFFFFF?text=PayLah+QR";
+  "https://placehold.co/200x200/2563EB/FFFFFF?text=PayLah+QR";
 
 export default function InvoiceClient({ data }: Props) {
   const router = useRouter();
@@ -64,26 +64,26 @@ export default function InvoiceClient({ data }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-ice-50 pb-28">
+    <div className="min-h-screen bg-page pb-28">
       {/* Header */}
       <div className="sticky top-0 z-20 bg-white/90 backdrop-blur-sm border-b border-border px-4 py-3 flex items-center gap-3">
         <button
           onClick={() => router.back()}
-          className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-ice-100 transition-colors cursor-pointer"
+          className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-page transition-colors cursor-pointer"
         >
-          <ArrowLeft size={18} className="text-khan-navy" />
+          <ArrowLeft size={18} className="text-deep-navy" />
         </button>
         <div className="flex-1">
           <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">
             Invoice
           </p>
-          <h1 className="text-sm font-bold text-khan-navy leading-tight">
+          <h1 className="text-sm font-medium text-deep-navy leading-tight">
             {data.student.name}
           </h1>
         </div>
         <span
           className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${
-            isPaid ? "bg-teal-50 text-teal-600" : "bg-sun-50 text-sun-600"
+            isPaid ? "bg-success-bg text-success-text" : "bg-warning-bg text-warning-text"
           }`}
         >
           {isPaid ? "Paid" : "Pending"}
@@ -92,13 +92,13 @@ export default function InvoiceClient({ data }: Props) {
 
       <div className="px-4 pt-5 space-y-4">
         {/* Student card */}
-        <div className="bg-khan-navy rounded-2xl p-5 text-white">
+        <div className="bg-action-blue rounded-2xl p-5 text-white">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white font-bold text-sm">
               {getInitials(data.student.name)}
             </div>
             <div>
-              <p className="font-bold text-base">{data.student.name}</p>
+              <p className="font-medium text-base">{data.student.name}</p>
               <p className="text-white/60 text-xs">
                 {data.student.subject} · {data.student.level}
               </p>
@@ -115,11 +115,11 @@ export default function InvoiceClient({ data }: Props) {
         {/* Session details */}
         <div className="bg-white rounded-2xl border border-border overflow-hidden">
           <div className="flex items-center gap-2 px-4 pt-4 pb-2">
-            <Clock size={14} className="text-khan-navy" />
-            <p className="text-xs font-bold text-khan-navy uppercase tracking-widest">
+            <Clock size={14} className="text-deep-navy" />
+            <p className="text-xs font-medium text-deep-navy uppercase tracking-widest">
               Sessions
             </p>
-            <span className="ml-auto text-xs font-bold text-teal-600">
+            <span className="ml-auto text-xs font-bold text-action-blue">
               S${data.sessionTotal.toFixed(2)}
             </span>
           </div>
@@ -131,7 +131,7 @@ export default function InvoiceClient({ data }: Props) {
           ) : (
             <table className="w-full text-xs">
               <thead>
-                <tr className="text-[10px] font-bold text-muted-foreground uppercase tracking-wide bg-ice-50">
+                <tr className="text-[10px] font-bold text-muted-foreground uppercase tracking-wide bg-page">
                   <th className="text-left px-4 py-2">Date</th>
                   <th className="text-center px-2 py-2">Duration</th>
                   <th className="text-center px-2 py-2">Rate</th>
@@ -142,9 +142,9 @@ export default function InvoiceClient({ data }: Props) {
                 {data.sessions.map((item) => (
                   <tr
                     key={item.session.id}
-                    className="border-t border-ice-100"
+                    className="border-t border-border"
                   >
-                    <td className="px-4 py-2.5 text-khan-navy font-medium">
+                    <td className="px-4 py-2.5 text-deep-navy font-medium">
                       {formatDate(item.session.scheduledAt)}
                     </td>
                     <td className="px-2 py-2.5 text-center text-muted-foreground">
@@ -153,7 +153,7 @@ export default function InvoiceClient({ data }: Props) {
                     <td className="px-2 py-2.5 text-center text-muted-foreground">
                       S${data.student.hourlyRate}/hr
                     </td>
-                    <td className="px-4 py-2.5 text-right font-bold text-khan-navy">
+                    <td className="px-4 py-2.5 text-right font-bold text-deep-navy">
                       S${item.fee.toFixed(2)}
                     </td>
                   </tr>
@@ -167,29 +167,29 @@ export default function InvoiceClient({ data }: Props) {
         {data.materials.length > 0 && (
           <div className="bg-white rounded-2xl border border-border overflow-hidden">
             <div className="flex items-center gap-2 px-4 pt-4 pb-2">
-              <Package size={14} className="text-khan-navy" />
-              <p className="text-xs font-bold text-khan-navy uppercase tracking-widest">
+              <Package size={14} className="text-deep-navy" />
+              <p className="text-xs font-medium text-deep-navy uppercase tracking-widest">
                 Materials
               </p>
-              <span className="ml-auto text-xs font-bold text-teal-600">
+              <span className="ml-auto text-xs font-bold text-action-blue">
                 S${data.materialsTotal.toFixed(2)}
               </span>
             </div>
-            <div className="divide-y divide-ice-100">
+            <div className="divide-y divide-border">
               {data.materials.map((m) => (
                 <div
                   key={m.id}
                   className="flex items-center justify-between px-4 py-2.5"
                 >
                   <div>
-                    <p className="text-xs font-medium text-khan-navy">
+                    <p className="text-xs font-medium text-deep-navy">
                       {m.name}
                     </p>
                     <p className="text-[10px] text-muted-foreground">
                       {formatDate(m.createdAt)}
                     </p>
                   </div>
-                  <p className="text-xs font-bold text-khan-navy">
+                  <p className="text-xs font-bold text-deep-navy">
                     S${m.cost.toFixed(2)}
                   </p>
                 </div>
@@ -199,12 +199,12 @@ export default function InvoiceClient({ data }: Props) {
         )}
 
         {/* Grand total */}
-        <div className="bg-white rounded-2xl border-2 border-teal-400 p-4">
+        <div className="bg-white rounded-2xl p-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-muted-foreground">
               Sessions subtotal
             </span>
-            <span className="text-xs font-semibold text-khan-navy">
+            <span className="text-xs font-semibold text-deep-navy">
               S${data.sessionTotal.toFixed(2)}
             </span>
           </div>
@@ -213,14 +213,14 @@ export default function InvoiceClient({ data }: Props) {
               <span className="text-xs text-muted-foreground">
                 Materials subtotal
               </span>
-              <span className="text-xs font-semibold text-khan-navy">
+              <span className="text-xs font-semibold text-deep-navy">
                 S${data.materialsTotal.toFixed(2)}
               </span>
             </div>
           )}
-          <div className="border-t border-ice-200 pt-2 mt-2 flex items-center justify-between">
-            <span className="text-sm font-bold text-khan-navy">Total Due</span>
-            <span className="text-xl font-bold text-khan-navy">
+          <div className="border-t border-border pt-2 mt-2 flex items-center justify-between">
+            <span className="text-sm font-medium text-deep-navy">Total Due</span>
+            <span className="text-xl font-bold text-deep-navy">
               S${data.grandTotal.toFixed(2)}
             </span>
           </div>
@@ -233,8 +233,8 @@ export default function InvoiceClient({ data }: Props) {
             className="w-full flex items-center justify-between cursor-pointer"
           >
             <div className="flex items-center gap-2">
-              <QrCode size={14} className="text-khan-navy" />
-              <span className="text-xs font-bold text-khan-navy uppercase tracking-widest">
+              <QrCode size={14} className="text-deep-navy" />
+              <span className="text-xs font-medium text-deep-navy uppercase tracking-widest">
                 PayLah QR Code
               </span>
             </div>
@@ -276,10 +276,10 @@ export default function InvoiceClient({ data }: Props) {
             <button
               onClick={handleMarkPaid}
               disabled={markingPaid}
-              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl border-2 border-teal-400 text-teal-600 font-bold text-sm hover:bg-teal-50 transition-colors disabled:opacity-50 cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl text-success-text font-bold text-sm hover:bg-success-bg transition-colors disabled:opacity-50 cursor-pointer"
             >
               {markingPaid ? (
-                <span className="w-4 h-4 border-2 border-teal-500 border-t-transparent rounded-full animate-spin" />
+                <span className="w-4 h-4 border-2 border-action-blue border-t-transparent rounded-full animate-spin" />
               ) : (
                 <CheckCircle size={16} />
               )}
@@ -288,7 +288,7 @@ export default function InvoiceClient({ data }: Props) {
           )}
 
           {isPaid && (
-            <div className="flex items-center justify-center gap-2 py-3 text-teal-600 text-sm font-semibold">
+            <div className="flex items-center justify-center gap-2 py-3 text-success-text text-sm font-semibold">
               <CheckCircle size={16} />
               Payment received
             </div>
@@ -318,7 +318,7 @@ export default function InvoiceClient({ data }: Props) {
                     <MessageCircle size={14} className="text-white" />
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-khan-navy">
+                    <p className="text-xs font-medium text-deep-navy">
                       WhatsApp Preview
                     </p>
                     <p className="text-[10px] text-muted-foreground">
@@ -338,7 +338,7 @@ export default function InvoiceClient({ data }: Props) {
                 <div className="flex gap-3">
                   <button
                     onClick={() => setShowWhatsApp(false)}
-                    className="flex-1 py-2.5 rounded-xl border border-border text-xs font-bold text-muted-foreground hover:bg-ice-50 transition-colors cursor-pointer"
+                    className="flex-1 py-2.5 rounded-xl border border-border text-xs font-bold text-muted-foreground hover:bg-page transition-colors cursor-pointer"
                   >
                     Cancel
                   </button>
@@ -359,7 +359,7 @@ export default function InvoiceClient({ data }: Props) {
                 >
                   <CheckCircle size={28} className="text-white" />
                 </div>
-                <p className="text-khan-navy font-bold text-base">
+                <p className="text-deep-navy font-medium text-base">
                   Message Sent!
                 </p>
                 <p className="text-muted-foreground text-xs text-center">
@@ -370,7 +370,7 @@ export default function InvoiceClient({ data }: Props) {
                     setShowWhatsApp(false);
                     setWhatsAppSent(false);
                   }}
-                  className="mt-2 px-6 py-2.5 rounded-xl bg-ice-100 text-khan-navy text-xs font-bold hover:bg-ice-200 transition-colors cursor-pointer"
+                  className="mt-2 px-6 py-2.5 rounded-xl bg-page text-deep-navy text-xs font-bold hover:bg-border transition-colors cursor-pointer"
                 >
                   Close
                 </button>
