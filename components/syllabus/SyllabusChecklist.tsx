@@ -91,21 +91,21 @@ export default function SyllabusChecklist({
   return (
     <div className="flex flex-col gap-3">
       {/* Overall progress bar */}
-      <div className="bg-white rounded-xl border border-border shadow-card p-4">
+      <div className="bg-white rounded-xl border border-border p-4">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
-            <BookOpen size={15} className="text-teal-500" />
-            <span className="text-sm font-bold text-khan-navy">
+            <BookOpen size={15} className="text-action-blue" />
+            <span className="text-sm font-bold text-deep-navy">
               Overall Progress
             </span>
           </div>
-          <span className="text-sm font-bold text-teal-600">
+          <span className="text-sm font-bold text-action-blue">
             {totalCovered}/{totalItems}
           </span>
         </div>
-        <div className="w-full h-2.5 bg-ice-200 rounded-full overflow-hidden">
+        <div className="w-full h-2.5 bg-border rounded-full overflow-hidden">
           <div
-            className="h-full bg-teal-500 rounded-full transition-all duration-700"
+            className="h-full bg-action-blue rounded-full transition-all duration-700"
             style={{ width: `${overallPct}%` }}
           />
         </div>
@@ -123,25 +123,25 @@ export default function SyllabusChecklist({
         return (
           <div
             key={group.stage}
-            className="bg-white rounded-xl border border-border shadow-card overflow-hidden"
+            className="bg-white rounded-xl border border-border overflow-hidden"
           >
             {/* Stage header */}
             <button
               onClick={() => toggleStage(group.stage)}
-              className="w-full flex items-center gap-3 p-4 text-left hover:bg-ice-50 transition-colors cursor-pointer"
+              className="w-full flex items-center gap-3 p-4 text-left hover:bg-page transition-colors cursor-pointer"
             >
               <div className="flex-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-bold text-khan-navy">
+                  <span className="text-sm font-bold text-deep-navy">
                     {stageLabel(group.stage)}
                   </span>
-                  <span className="text-[10px] font-medium text-teal-600 bg-teal-50 px-2 py-0.5 rounded-full">
+                  <span className="text-[10px] font-medium text-success-text bg-success-bg px-2 py-0.5 rounded-full">
                     {group.covered}/{group.total}
                   </span>
                 </div>
-                <div className="mt-1.5 w-full h-1.5 bg-ice-200 rounded-full overflow-hidden">
+                <div className="mt-1.5 w-full h-1.5 bg-border rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-teal-500 rounded-full transition-all duration-700"
+                    className="h-full bg-action-blue rounded-full transition-all duration-700"
                     style={{ width: `${stagePct}%` }}
                   />
                 </div>
@@ -171,7 +171,7 @@ export default function SyllabusChecklist({
                       {/* Category header */}
                       <button
                         onClick={() => toggleCat(catKey)}
-                        className="w-full flex items-center gap-2 px-4 py-2.5 text-left hover:bg-ice-50 transition-colors cursor-pointer"
+                        className="w-full flex items-center gap-2 px-4 py-2.5 text-left hover:bg-page transition-colors cursor-pointer"
                       >
                         {isCatOpen ? (
                           <ChevronDown
@@ -197,7 +197,7 @@ export default function SyllabusChecklist({
                           {cat.items.map((item) => (
                             <div key={item.id} className="relative">
                               {newlyTaggedIds.includes(item.id) && (
-                                <span className="absolute -top-1 -right-1 w-2 h-2 bg-teal-500 rounded-full animate-pulse-teal z-10" />
+                                <span className="absolute -top-1 -right-1 w-2 h-2 bg-action-blue rounded-full animate-pulse z-10" />
                               )}
                               <TopicBadge
                                 name={item.topicName}

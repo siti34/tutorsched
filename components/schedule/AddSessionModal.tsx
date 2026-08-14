@@ -37,14 +37,14 @@ export default function AddSessionModal({ students, onClose }: Props) {
       <div className="fixed bottom-0 inset-x-0 bg-white rounded-t-3xl z-50 shadow-2xl max-h-[92dvh] overflow-y-auto animate-slide-up">
         {/* Handle */}
         <div className="flex justify-center pt-3 pb-1">
-          <div className="w-10 h-1 bg-ice-200 rounded-full" />
+          <div className="w-10 h-1 bg-border rounded-full" />
         </div>
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border">
-          <h2 className="text-khan-navy font-bold text-lg">New Session</h2>
+          <h2 className="text-deep-navy font-medium text-lg">New Session</h2>
           <button
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-ice-100 transition-colors cursor-pointer"
+            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-page transition-colors cursor-pointer"
           >
             <X size={18} className="text-muted-foreground" />
           </button>
@@ -54,14 +54,14 @@ export default function AddSessionModal({ students, onClose }: Props) {
           {/* Student */}
           <div className="flex flex-col gap-1.5">
             <label className="flex items-center gap-1.5 text-[11px] font-bold text-muted-foreground uppercase tracking-widest">
-              <User size={11} className="text-teal-500" />
+              <User size={11} className="text-action-blue" />
               Student
             </label>
             <div className="relative">
               <select
                 value={studentId}
                 onChange={(e) => setStudentId(e.target.value)}
-                className="w-full bg-ice-100 border border-border rounded-xl px-4 py-3 text-sm text-khan-navy font-medium appearance-none outline-none focus:border-teal-500 transition-colors cursor-pointer"
+                className="w-full bg-page border border-border rounded-xl px-4 py-3 text-sm text-deep-navy font-medium appearance-none outline-none focus:border-action-blue transition-colors cursor-pointer"
               >
                 {students.map((s) => (
                   <option key={s.id} value={s.id}>{s.name}</option>
@@ -75,7 +75,7 @@ export default function AddSessionModal({ students, onClose }: Props) {
           <div className="grid grid-cols-2 gap-3">
             <div className="flex flex-col gap-1.5">
               <label className="flex items-center gap-1.5 text-[11px] font-bold text-muted-foreground uppercase tracking-widest">
-                <CalendarDays size={11} className="text-teal-500" />
+                <CalendarDays size={11} className="text-action-blue" />
                 Date
               </label>
               <input
@@ -83,19 +83,19 @@ export default function AddSessionModal({ students, onClose }: Props) {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 required
-                className="bg-ice-100 border border-border rounded-xl px-3 py-3 text-sm text-khan-navy outline-none focus:border-teal-500 transition-colors cursor-pointer"
+                className="bg-page border border-border rounded-xl px-3 py-3 text-sm text-deep-navy outline-none focus:border-action-blue transition-colors cursor-pointer"
               />
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="flex items-center gap-1.5 text-[11px] font-bold text-muted-foreground uppercase tracking-widest">
-                <Clock size={11} className="text-teal-500" />
+                <Clock size={11} className="text-action-blue" />
                 Time
               </label>
               <input
                 type="time"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
-                className="bg-ice-100 border border-border rounded-xl px-3 py-3 text-sm text-khan-navy outline-none focus:border-teal-500 transition-colors cursor-pointer"
+                className="bg-page border border-border rounded-xl px-3 py-3 text-sm text-deep-navy outline-none focus:border-action-blue transition-colors cursor-pointer"
               />
             </div>
           </div>
@@ -103,7 +103,7 @@ export default function AddSessionModal({ students, onClose }: Props) {
           {/* Duration */}
           <div className="flex flex-col gap-1.5">
             <label className="flex items-center gap-1.5 text-[11px] font-bold text-muted-foreground uppercase tracking-widest">
-              <Clock size={11} className="text-teal-500" />
+              <Clock size={11} className="text-action-blue" />
               Duration
             </label>
             <div className="flex gap-2">
@@ -114,8 +114,8 @@ export default function AddSessionModal({ students, onClose }: Props) {
                   onClick={() => setDuration(d)}
                   className={`flex-1 py-2.5 rounded-xl text-xs font-bold border transition-all duration-150 cursor-pointer ${
                     duration === d
-                      ? "bg-teal-500 text-white border-teal-500"
-                      : "bg-ice-100 text-muted-foreground border-border hover:border-teal-500"
+                      ? "bg-action-blue text-white border-action-blue"
+                      : "bg-page text-muted-foreground border-border hover:border-action-blue"
                   }`}
                 >
                   {d}m
@@ -127,14 +127,14 @@ export default function AddSessionModal({ students, onClose }: Props) {
           {/* Mode */}
           <div className="flex flex-col gap-1.5">
             <label className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">Mode</label>
-            <div className="flex bg-ice-100 border border-border rounded-xl p-1 gap-1">
+            <div className="flex bg-white border border-border rounded-xl p-1 gap-1">
               {(["online", "in-person"] as const).map((m) => (
                 <button
                   key={m}
                   type="button"
                   onClick={() => { setMode(m); setLocation(m === "online" ? "Zoom" : ""); }}
                   className={`flex-1 py-2.5 rounded-lg text-xs font-bold transition-all duration-150 cursor-pointer ${
-                    mode === m ? "bg-white text-khan-navy shadow-sm" : "text-muted-foreground"
+                    mode === m ? "bg-sky-accent text-deep-navy" : "text-muted-foreground hover:text-deep-navy"
                   }`}
                 >
                   {m === "online" ? "Online" : "In-person"}
@@ -146,7 +146,7 @@ export default function AddSessionModal({ students, onClose }: Props) {
           {/* Location */}
           <div className="flex flex-col gap-1.5">
             <label className="flex items-center gap-1.5 text-[11px] font-bold text-muted-foreground uppercase tracking-widest">
-              <MapPin size={11} className="text-teal-500" />
+              <MapPin size={11} className="text-action-blue" />
               Location
             </label>
             <input
@@ -154,7 +154,7 @@ export default function AddSessionModal({ students, onClose }: Props) {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder={mode === "online" ? "Zoom / Google Meet" : "e.g. Starbucks Orchard"}
-              className="bg-ice-100 border border-border rounded-xl px-4 py-3 text-sm text-khan-navy outline-none focus:border-teal-500 transition-colors"
+              className="bg-page border border-border rounded-xl px-4 py-3 text-sm text-deep-navy outline-none focus:border-action-blue transition-colors"
             />
           </div>
 
@@ -162,7 +162,7 @@ export default function AddSessionModal({ students, onClose }: Props) {
           <button
             type="submit"
             disabled={saving}
-            className="w-full bg-khan-navy text-white rounded-xl py-4 font-bold text-sm hover:bg-khan-navy-light active:scale-[0.98] transition-all duration-150 disabled:opacity-60 cursor-pointer"
+            className="w-full bg-action-blue text-white rounded-xl py-4 font-bold text-sm hover:bg-action-blue-600 active:scale-[0.98] transition-all duration-150 disabled:opacity-60 cursor-pointer"
           >
             {saving ? (
               <span className="flex items-center justify-center gap-2">

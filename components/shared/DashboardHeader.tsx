@@ -26,19 +26,19 @@ export default function DashboardHeader({ tutorName }: Props) {
     <header className="fixed top-0 inset-x-0 z-30 bg-white border-b border-border h-16 flex items-center px-4 sm:px-6">
       {/* Wordmark */}
       <Link href="/schedule" className="flex-shrink-0 flex items-center gap-2">
-        <div className="w-7 h-7 bg-teal-500 rounded-lg flex items-center justify-center">
+        <div className="w-7 h-7 bg-action-blue rounded-lg flex items-center justify-center">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M2 3h10M2 7h7M2 11h5" stroke="white" strokeWidth="2" strokeLinecap="round"/>
           </svg>
         </div>
-        <span className="text-khan-navy font-bold text-base tracking-tight">
-          Tutor<span className="text-teal-500">Sched</span>
+        <span className="text-deep-navy font-bold text-base tracking-tight">
+          Tutor<span className="text-action-blue">Sched</span>
         </span>
       </Link>
 
       {/* Page title (mobile) */}
       {pageTitle !== "TutorSched" && (
-        <span className="ml-3 text-slate-400 text-sm font-medium sm:hidden">
+        <span className="ml-3 text-muted-foreground text-sm font-medium sm:hidden">
           · {pageTitle}
         </span>
       )}
@@ -47,11 +47,11 @@ export default function DashboardHeader({ tutorName }: Props) {
 
       {/* Tutor name + bell */}
       <div className="flex items-center gap-3">
-        <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-ice-100 transition-colors text-slate-400 hover:text-khan-navy cursor-pointer">
+        <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-action-blue-50 transition-colors text-muted-foreground hover:text-deep-navy cursor-pointer">
           <Bell size={17} />
         </button>
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-khan-navy flex items-center justify-center text-white text-xs font-bold">
+          <div className="w-8 h-8 rounded-full bg-action-blue flex items-center justify-center text-white text-xs font-bold">
             {tutorName
               .split(" ")
               .map((n) => n[0])
@@ -59,7 +59,7 @@ export default function DashboardHeader({ tutorName }: Props) {
               .slice(0, 2)
               .toUpperCase()}
           </div>
-          <span className="text-khan-navy text-sm font-semibold hidden sm:inline">
+          <span className="text-deep-navy text-sm font-semibold hidden sm:inline">
             {tutorName}
           </span>
         </div>

@@ -117,21 +117,21 @@ export default function NoteEditor({
         );
       case "ai-tagging":
         return (
-          <span className="flex items-center gap-1 text-[11px] text-teal-600">
+          <span className="flex items-center gap-1 text-[11px] text-action-blue">
             <Sparkles size={11} className="animate-pulse" />
             AI tagging…
           </span>
         );
       case "saved":
         return (
-          <span className="flex items-center gap-1 text-[11px] text-teal-600">
+          <span className="flex items-center gap-1 text-[11px] text-success-text">
             <CheckCircle2 size={11} />
             Saved
           </span>
         );
       case "error":
         return (
-          <span className="text-[11px] text-red-500">Save failed</span>
+          <span className="text-[11px] text-error-text">Save failed</span>
         );
       default:
         return lastSaved ? (
@@ -157,13 +157,13 @@ export default function NoteEditor({
       <div className="mt-auto bg-white rounded-t-2xl shadow-2xl flex flex-col max-h-[90vh] animate-slide-up">
         {/* Handle */}
         <div className="flex justify-center pt-3 pb-1">
-          <div className="w-10 h-1 rounded-full bg-ice-200" />
+          <div className="w-10 h-1 rounded-full bg-page" />
         </div>
 
         {/* Header */}
         <div className="flex items-start justify-between px-5 py-3 border-b border-border">
           <div>
-            <p className="text-base font-bold text-khan-navy leading-tight">
+            <p className="text-base font-bold text-deep-navy leading-tight">
               {studentName}
             </p>
             <p className="text-xs text-muted-foreground">
@@ -174,7 +174,7 @@ export default function NoteEditor({
             {statusIndicator()}
             <button
               onClick={onClose}
-              className="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-ice-100 transition-colors cursor-pointer"
+              className="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-page transition-colors cursor-pointer"
             >
               <X size={15} className="text-muted-foreground" />
             </button>
@@ -187,14 +187,14 @@ export default function NoteEditor({
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="How did the session go? What topics did you cover? Any observations about the student's progress..."
-          className="flex-1 min-h-[300px] max-h-[55vh] resize-none px-5 py-4 text-sm text-khan-navy placeholder:text-slate-300 focus:outline-none font-sans leading-relaxed bg-white"
+          className="flex-1 min-h-[300px] max-h-[55vh] resize-none px-5 py-4 text-sm text-deep-navy placeholder:text-muted-foreground focus:outline-none font-sans leading-relaxed bg-white"
         />
 
         {/* AI Toast */}
         {toast && (
-          <div className="mx-5 mb-3 px-4 py-2.5 rounded-xl border border-teal-200 bg-teal-50 flex items-start gap-2 animate-fade-in">
-            <Sparkles size={14} className="text-teal-500 flex-shrink-0 mt-0.5" />
-            <p className="text-xs text-teal-700 font-medium">{toast}</p>
+          <div className="mx-5 mb-3 px-4 py-2.5 rounded-xl border border-action-blue-100 bg-action-blue-50 flex items-start gap-2 animate-fade-in">
+            <Sparkles size={14} className="text-action-blue flex-shrink-0 mt-0.5" />
+            <p className="text-xs text-action-blue-700 font-medium">{toast}</p>
           </div>
         )}
 

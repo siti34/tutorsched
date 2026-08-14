@@ -7,10 +7,11 @@ import {
   Views,
   type Event as RBCEvent,
 } from "react-big-calendar";
-import { format, parse, startOfWeek, getDay, addMinutes } from "date-fns";
+import { format, parse, startOfWeek, getDay, addMinutes, isSameDay } from "date-fns";
 import { enUS } from "date-fns/locale/en-US";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import type { SessionWithStudent } from "@/lib/actions/sessions";
+import { STUDENT_COLOR_FALLBACK } from "@/lib/constants";
 
 const localizer = dateFnsLocalizer({
   format: (date: Date, fmt: string) => format(date, fmt, { locale: enUS }),
@@ -29,6 +30,49 @@ interface Props {
   colorMap: Record<string, string>;
 }
 
+function CalendarHeader({ date }: { date: Date }) {
+  const today = isSameDay(date, new Date());
+  return (
+    <div className="flex flex-col items-center gap-1 py-1.5">
+      <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+        {format(date, "EEE")}
+      </span>
+      <span
+        className={`flex h-7 w-7 items-center justify-center rounded-full text-sm ${
+          today ? "bg-action-blue font-medium text-white" : "font-normal text-deep-navy"
+        }`}
+      >
+        {format(date, "d")}
+      </span>
+    </div>
+  );
+}
+
+function CalendarEventCard({ event }: { event: CalendarEvent }) {
+  const { durationMin, student } = event.resource;
+  const start = event.start ? format(event.start, "h:mm a") : "";
+
+  if (durationMin <= 60) {
+    return (
+      <div className="truncate leading-tight">
+        {start} · {student.name}
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col overflow-hidden leading-tight">
+      <span className="truncate text-[10px] font-normal opacity-90">
+        {start} – {event.end ? format(event.end, "h:mm a") : ""}
+      </span>
+      <span className="truncate">{student.name}</span>
+      {durationMin >= 90 && (
+        <span className="truncate text-[10px] font-normal opacity-90">{student.subject}</span>
+      )}
+    </div>
+  );
+}
+
 export default function CalendarView({ sessions, colorMap }: Props) {
   const events: CalendarEvent[] = useMemo(
     () =>
@@ -42,19 +86,12 @@ export default function CalendarView({ sessions, colorMap }: Props) {
   );
 
   function eventPropGetter(event: CalendarEvent) {
-    const color = colorMap[event.resource.studentId] ?? "#0A2A66";
+    const color = colorMap[event.resource.studentId] ?? STUDENT_COLOR_FALLBACK;
     const done = event.resource.status !== "upcoming";
     return {
       style: {
         backgroundColor: color,
-        borderRadius: "8px",
-        border: "none",
-        borderLeft: "3px solid #14BF96",
-        color: "#FFFFFF",
-        fontSize: "11px",
-        fontWeight: 600,
         opacity: done ? 0.55 : 1,
-        padding: "2px 6px",
       },
     };
   }
@@ -68,6 +105,7 @@ export default function CalendarView({ sessions, colorMap }: Props) {
         views={[Views.WEEK, Views.DAY, Views.AGENDA]}
         style={{ height: 560 }}
         eventPropGetter={eventPropGetter}
+        components={{ header: CalendarHeader, event: CalendarEventCard }}
         min={new Date(0, 0, 0, 7, 0, 0)}
         max={new Date(0, 0, 0, 22, 0, 0)}
         popup

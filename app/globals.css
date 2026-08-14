@@ -5,29 +5,6 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 216 50% 96%;
-    --foreground: 220 75% 22%;
-    --card: 0 0% 100%;
-    --card-foreground: 220 75% 22%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 75% 22%;
-    --primary: 220 75% 22%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 216 50% 96%;
-    --secondary-foreground: 220 75% 22%;
-    --muted: 216 50% 96%;
-    --muted-foreground: 215 16% 47%;
-    --accent: 163 80% 41%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 163 80% 41%;
-    --radius: 0.75rem;
-  }
-
   * {
     @apply border-border;
   }
@@ -44,7 +21,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: -0.025em;
   }
 }
@@ -55,31 +32,120 @@
   }
 }
 
-/* react-big-calendar custom styles */
+/* react-big-calendar custom styles — Google Calendar–style flat theme */
 .rbc-calendar {
   font-family: "Plus Jakarta Sans", Inter, system-ui, sans-serif;
   background: transparent;
 }
 
+/* Toolbar */
+.rbc-toolbar {
+  @apply flex flex-wrap items-center justify-between gap-2 mb-4;
+}
+
+.rbc-toolbar .rbc-btn-group {
+  @apply inline-flex items-center gap-1;
+}
+
+.rbc-toolbar .rbc-btn-group:first-child button {
+  @apply text-sm font-medium text-deep-navy border border-border bg-white hover:bg-page transition-colors cursor-pointer rounded-lg px-3 py-1.5;
+}
+
+.rbc-toolbar-label {
+  @apply text-[15px] font-medium text-deep-navy px-1;
+}
+
+.rbc-toolbar .rbc-btn-group:last-child {
+  @apply gap-0.5 bg-white border border-border rounded-xl p-1;
+}
+
+.rbc-toolbar .rbc-btn-group:last-child button {
+  @apply text-sm font-medium text-muted-foreground border-none bg-transparent rounded-lg px-3 py-1.5 cursor-pointer transition-colors;
+}
+
+.rbc-toolbar .rbc-btn-group:last-child button:hover {
+  @apply text-deep-navy;
+}
+
+.rbc-toolbar .rbc-btn-group:last-child button.rbc-active {
+  @apply bg-sky-accent text-deep-navy;
+}
+
+/* Header row (day name + date) */
 .rbc-header {
-  @apply text-xs font-semibold text-khan-navy border-b border-slate-border py-2 bg-ice-100;
+  @apply border-b border-border bg-white py-0;
+  height: auto !important;
+  min-height: 56px !important;
+  overflow: visible !important;
+}
+
+.rbc-row.rbc-time-header-cell {
+  height: auto !important;
+  min-height: 56px !important;
+  overflow: visible !important;
+}
+
+.rbc-time-header-content,
+.rbc-time-header.rbc-overflowing {
+  border-color: theme("colors.border") !important;
+}
+
+/* This app never creates all-day sessions — drop the (always-empty) all-day row entirely
+   instead of trying to keep it collapsed via height rules. */
+.rbc-allday-cell {
+  display: none !important;
 }
 
 .rbc-today {
-  @apply bg-teal-50;
+  @apply bg-action-blue-50;
 }
 
+/* Grid lines */
+.rbc-time-content,
+.rbc-time-content > * + *,
+.rbc-day-slot .rbc-time-slot,
+.rbc-timeslot-group,
+.rbc-time-header-gutter,
+.rbc-time-gutter,
+.rbc-time-view,
+.rbc-time-header {
+  border-color: theme("colors.border") !important;
+}
+
+.rbc-timeslot-group {
+  min-height: 64px !important;
+}
+
+.rbc-time-gutter .rbc-label {
+  @apply text-[11px] font-normal text-muted-foreground;
+}
+
+/* Current time indicator */
+.rbc-current-time-indicator {
+  @apply bg-action-blue;
+  height: 2px !important;
+}
+
+/* Events */
 .rbc-event {
-  @apply bg-khan-navy border-none rounded-md text-white text-xs font-medium px-2 py-1;
-  border-left: 3px solid #14BF96 !important;
+  @apply border-none rounded-md text-white text-[11px] font-medium px-1.5 py-1;
+  box-shadow: none !important;
 }
 
-.rbc-event:hover {
-  @apply bg-khan-navy-light;
+/* CalendarEventCard renders its own time text — hide RBC's automatic label to avoid
+   an uncoordinated extra line stacking on top of it. */
+.rbc-event-label {
+  display: none !important;
+}
+
+.rbc-event:hover,
+.rbc-event:focus {
+  @apply outline-none;
+  filter: brightness(0.92);
 }
 
 .rbc-event.rbc-selected {
-  @apply bg-khan-navy-dark;
+  filter: brightness(0.85);
 }
 
 .rbc-slot-selecting .rbc-event {
@@ -87,23 +153,33 @@
 }
 
 .rbc-off-range-bg {
-  @apply bg-ice-50;
-}
-
-.rbc-toolbar {
-  @apply flex items-center justify-between mb-4;
-}
-
-.rbc-toolbar button {
-  @apply text-sm font-semibold text-khan-navy border border-slate-border px-3 py-1.5 rounded-md bg-white hover:bg-ice-100 transition-colors cursor-pointer;
-}
-
-.rbc-toolbar button.rbc-active {
-  @apply bg-khan-navy text-white border-khan-navy;
+  @apply bg-page;
 }
 
 .rbc-show-more {
-  @apply text-teal-500 text-xs font-semibold cursor-pointer;
+  @apply text-action-blue text-xs font-semibold cursor-pointer;
+}
+
+/* Agenda view */
+.rbc-agenda-view table.rbc-agenda-table {
+  @apply border border-border rounded-xl overflow-hidden;
+}
+
+.rbc-agenda-view table.rbc-agenda-table thead {
+  @apply bg-page;
+}
+
+.rbc-agenda-view table.rbc-agenda-table th {
+  @apply text-xs font-medium text-deep-navy py-2 px-3 text-left border-b border-border;
+}
+
+.rbc-agenda-view table.rbc-agenda-table td {
+  @apply text-sm text-deep-navy py-2 px-3 border-b border-border;
+}
+
+.rbc-agenda-date-cell,
+.rbc-agenda-time-cell {
+  @apply text-muted-foreground text-xs whitespace-nowrap;
 }
 
 /* Scrollbar */
@@ -115,8 +191,8 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-ice-200 rounded-full;
+  @apply bg-border rounded-full;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-slate-border;
+  @apply bg-muted-foreground/40;
 }

@@ -6,6 +6,7 @@ import { eq, and, gte, lte } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { randomUUID } from "crypto";
 import type { Student, Session, Material, Invoice } from "@/db/schema";
+import { getStudentColor } from "@/lib/constants";
 
 export type SessionLineItem = {
   session: Session;
@@ -42,8 +43,6 @@ export type BillingOverview = {
   pendingTotal: number;
   students: BillingStudentOverview[];
 };
-
-const STUDENT_COLORS = ["#0A2A66", "#14BF96", "#FFC212", "#6366F1"];
 
 export async function getBillingOverview(): Promise<BillingOverview> {
   const now = new Date();
@@ -104,7 +103,7 @@ export async function getBillingOverview(): Promise<BillingOverview> {
     overview.push({
       studentId: student.id,
       studentName: student.name,
-      color: STUDENT_COLORS[idx % STUDENT_COLORS.length],
+      color: getStudentColor(student.id, allStudents),
       sessionsCount: completedSessions.length,
       sessionFee,
       materialsTotal,
